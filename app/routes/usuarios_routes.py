@@ -8,7 +8,7 @@ usuarios_blueprint = Blueprint('usuarios', __name__)
 def obtenerUsuarios():
     #agregar logica para obtener lista de usuarios
     print('por aquí pasó')
-    return {jsonify({'ola': 'mundo'})}
+    return jsonify(status=True, msg='Obtener Usuarios')
 
 @usuarios_blueprint.route('/usuarios', methods=['POST'])
 def CrearUsuario():

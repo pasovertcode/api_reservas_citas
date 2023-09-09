@@ -1,3 +1,4 @@
+from app.config import DATABASE_CONNECTION_URI
 from flask import Flask, jsonify
 
 app = Flask(__name__)
@@ -7,4 +8,4 @@ app.secret_key = 'secret_key'
 
 # Configurando/registrando rutas
 from app.routes import usuarios_routes
-app.register_blueprint(usuarios_routes, url_prefix='/usuarios')
+app.register_blueprint(usuarios_routes.usuarios_blueprint)
