@@ -1,14 +1,17 @@
-from flask import Blueprint, jsonify
-# agregar controlador y modelo
+from flask import Blueprint, jsonify, request
+from app.controlador import citas_controlador
+
 
 citas_blueprint = Blueprint('citas', __name__)
 
 #Rutas
 @citas_blueprint.route('/citas', methods=['GET'])
 def obtenerCitas():
-    #agregar logica para obtener lista de citas
-    print('por aquí pasó')
-    return jsonify(status=True, msg='Obtener citas')
+     try:
+        if request.method == 'GET':
+            return citas_controlador.obtener_Citas()
+     except Exception as e:
+        return jsonify(status=False, msg=str(e))
 
 @citas_blueprint.route('/citas', methods=['POST'])
 def crearCita():

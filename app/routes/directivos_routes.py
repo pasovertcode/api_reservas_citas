@@ -1,14 +1,16 @@
-from flask import Blueprint, jsonify
-# agregar controlador y modelo
+from flask import Blueprint, jsonify, request
+from app.controlador import directivos_controlador
 
 directivos_blueprint = Blueprint('directivos', __name__)
 
 #Rutas
 @directivos_blueprint.route('/directivos', methods=['GET'])
 def obtenerDirectivos():
-    #agregar logica para obtener lista de Directivo
-    print('por aquí pasó')
-    return jsonify(status=True, msg='Obtener Directivo')
+     try:
+        if request.method == 'GET':
+            return directivos_controlador.obtener_Directivos()
+     except Exception as e:
+        return jsonify(status=False, msg=str(e))
 
 @directivos_blueprint.route('/directivos', methods=['POST'])
 def crearDirectivo():

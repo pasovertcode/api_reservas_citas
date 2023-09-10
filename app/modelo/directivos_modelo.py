@@ -1,4 +1,4 @@
-from app import db
+from app.utils.db import db
 
 class Directivo(db.Model):
     DirectivoID = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -12,3 +12,20 @@ class Directivo(db.Model):
 
     # Relación con la tabla de Citas (uno a muchos)
     citas = db.relationship('Cita', back_populates='directivo')
+
+    def __init__(self, departamento, horario_disponibilidad, estado, usuario):
+        self.Departamento = departamento
+        self.HorarioDisponibilidad = horario_disponibilidad
+        self.Estado = estado
+        self.usuario = usuario
+        
+    @property
+    def obtenerDatos(self):
+        return {
+            'DirectivoID': self.DirectivoID,
+            'Departamento': self.Departamento,
+            'HorarioDisponibilidad': self.HorarioDisponibilidad,
+            'Estado': self.Estado,
+            'UsuarioID': self.usuario.UserID,  # Puedes incluir datos del usuario relacionado
+            'Usuario': self.usuario.obtenerDatos  # Incluye datos completos del usuario como diccionario
+        }
