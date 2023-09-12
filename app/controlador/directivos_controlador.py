@@ -11,7 +11,19 @@ def obtener_Directivos():
         return jsonify(status=True, msg=lista_Directivos)
     except Exception as e:
         return jsonify(status= False, msg=str(e))
-    
+
+def obtener_directivo_by_identificacion(identificacion):
+    try:
+        # Traer el registro según el id dado
+        directivo = directivo_modelo.query.join(directivo_modelo.usuario).filter_by(Identificacion=identificacion).first()
+        # si está vacio enviar mensaje
+        if directivo is None:
+            return jsonify(status=False, msg="No se encontraron directivos.")
+        
+        return jsonify(status=True, msg=directivo.obtenerDatos)
+    except Exception as e:
+        return jsonify(status=False, msg=str(e))
+
 def obtener_directivo_by_id(directivoID):
     try:
         # Traer el registro según el id dado
@@ -39,7 +51,7 @@ def obtener_directivo_by_usuarioID(userID):
 def agregar_directivo(directivo):
     try:
         usuario = usuario_modelo.query.filter_by(Identificacion=directivo.usuario_identificacion).first()
-        nuevo_directivo = directivo_modelo(directivo.departamento, directivo.horario_disponibilidad, directivo.estado, usuario)
+        nuevo_directivo = directivo_modelo(directivo.Departamento, directivo.Estado, usuario.UserID , usuario)
         db.session.add(nuevo_directivo)
         db.session.commit()
         return jsonify(status=True, msg="registro de Directivo creado.")
@@ -57,9 +69,9 @@ def actualizar_directivo(directivo):
     except Exception as e:
         return jsonify(status=False, msg=str(e))
     
-def eliminar_directivo(directivo):
+def eliminar_directivo(identificacion):
     try:
-        old_directivo = directivo_modelo.query.filter_by(DirectivoID=directivo.directivoID).first()
+        old_directivo = directivo_modelo.query.join(directivo_modelo.usuario).filter_by(Identificacion=identificacion).first()
         old_directivo.Estado = 'desactivado'
         db.session.commit()
         return jsonify(status=True, msg='Se ha eliminado el directivo.')
