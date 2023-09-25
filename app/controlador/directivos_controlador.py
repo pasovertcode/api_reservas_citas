@@ -47,7 +47,10 @@ def obtener_directivo_by_usuarioID(userID):
         return jsonify(status=True, msg=directivo.obtenerDatos)
     except Exception as e:
         return jsonify(status=False, msg=str(e))
-    
+
+def agregar_horario_disponibilidad():
+    pass
+
 def agregar_directivo(directivo):
     try:
         usuario = usuario_modelo.query.filter_by(Identificacion=directivo.usuario_identificacion).first()

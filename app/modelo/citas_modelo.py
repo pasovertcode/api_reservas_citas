@@ -8,11 +8,11 @@ class Cita(db.Model):
 
     # Relación con la tabla de Usuarios (muchos a uno)
     UsuarioID = db.Column(db.Integer, db.ForeignKey('usuario.UserID'), nullable=False)
-    usuario = db.relationship('Usuario', back_populates='citas')
+    usuario = db.relationship('Usuario', foreign_keys=[UsuarioID])
 
     # Relación con la tabla de Directivos (muchos a uno)
     DirectivoID = db.Column(db.Integer, db.ForeignKey('directivo.DirectivoID'), nullable=False)
-    directivo = db.relationship('Directivo', back_populates='citas')
+    directivo = db.relationship('Directivo', foreign_keys=[DirectivoID])
     
     def __init__(self, fecha_hora_cita, estado_cita, notas, usuario, directivo):
         self.FechaHoraCita = fecha_hora_cita
@@ -29,7 +29,7 @@ class Cita(db.Model):
             'EstadoCita': self.EstadoCita,
             'Notas': self.Notas,
             'UsuarioID': self.usuario.UserID,
-            'Usuario': self.usuario.obtenerDatos(),
+            'Usuario': self.usuario.obtenerDatos,
             'DirectivoID': self.directivo.DirectivoID,
-            'Directivo': self.directivo.obtenerDatos()
+            'Directivo': self.directivo.obtenerDatos
         }

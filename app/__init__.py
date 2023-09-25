@@ -10,7 +10,8 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 # Configurando/registrando rutas
-from app.routes import usuarios_routes, directivos_routes, citas_routes
+from app.routes import usuarios_routes, directivos_routes, citas_routes, horariodisponibilidad_routes
 app.register_blueprint(usuarios_routes.usuarios_blueprint)
 app.register_blueprint(directivos_routes.directivos_blueprint)
 app.register_blueprint(citas_routes.citas_blueprint)
+app.register_blueprint(horariodisponibilidad_routes.horariodisponibilidad_blueprint)

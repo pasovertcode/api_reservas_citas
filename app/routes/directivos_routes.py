@@ -20,11 +20,9 @@ def managerDirectivo(id_directivo = None):
                 return directivos_controlador.eliminar_directivo(identificacion)
 
             directivo = directivo_modelo(
-                request.json['horario_nombre'], 
-                request.json['fecha'], 
-                request.json['Identificacion'], 
-                request.json['hora_inicio'], 
-                request.json['hora_fin']
+                request.json['Departamento'], 
+                request.json['Estado'], 
+                request.json['UsuarioID']
             )
 
             if request.method == 'POST':
