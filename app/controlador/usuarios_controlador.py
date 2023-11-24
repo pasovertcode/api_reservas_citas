@@ -66,3 +66,16 @@ def eliminar_usuario(identificacion):
         return jsonify(status=True, msg='Se ha eliminado el usuario.')
     except Exception as e:
         return jsonify(status=False, msg=str(e))
+    
+def login_usuario(usuarioID, password):
+    try:
+        usuario = usuario_modelo.query.filter_by(Identificacion = usuarioID).first()
+
+        if usuario is None:
+            return jsonify(status=False, msg="Ningun usuario encontrado.")
+        if usuario.Contraseña != password:
+            return jsonify(status=False, msg="Contraseña Incorrecta.")
+        
+        return jsonify(status=True, msg=usuario.obtenerDatos)
+    except Exception as e:
+        return jsonify(status=False, msg=str(e))

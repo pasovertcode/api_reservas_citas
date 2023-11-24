@@ -15,5 +15,5 @@ def obtenerCitas():
 
 @citas_blueprint.route('/citas', methods=['POST'])
 def crearCita():
-    #agregar logica para creacion de citas
+    #agregar lógica para creación de citas
     pass

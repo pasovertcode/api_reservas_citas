@@ -17,7 +17,7 @@ def obtener_cita_by_id(id_cita):
     try:
         # Traer el registro según el id dado
         cita = cita_modelo.query.filter_by(CitaID=id_cita).first()
-        # si está vacio enviar mensaje
+        # si está vacío enviar mensaje
         if cita is None:
             return jsonify(status=False, msg="Ninguna cita encontrada")
         
@@ -29,7 +29,7 @@ def obtener_cita_by_usuarioID(userID):
     try:
         # Traer el registro según el id dado
         cita = cita_modelo.query.filter_by(UsuarioID=userID).first()
-        # si está vacio enviar mensaje
+        # si está vacío enviar mensaje
         if cita is None:
             return jsonify(status=False, msg="Ninguna cita encontrada")
         

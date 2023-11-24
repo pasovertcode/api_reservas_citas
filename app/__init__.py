@@ -1,8 +1,10 @@
 from app.config import DATABASE_CONNECTION_URI
 from flask import Flask, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app,  origins="*", supports_credentials=True)
+app.config['CORS_HEADERS'] = 'Content-Type'
 # Configurando app
 app.secret_key = 'secret_key'
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_CONNECTION_URI
